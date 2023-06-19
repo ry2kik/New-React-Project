@@ -1,0 +1,33 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "It's a react project",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ry2kik/New-React-Project.git"
+  },
+  "author": "Raktimabho Ghosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ry2kik/New-React-Project/issues"
+  },
+  "homepage": "https://github.com/ry2kik/New-React-Project#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.9.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
