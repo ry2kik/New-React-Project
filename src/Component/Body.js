@@ -1,32 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { restaurentList } from "../Config";
 import { RestaurentCard } from "./RestaurentCard";
+import { Shimmer } from "./Shimmer";
 
-const filterData = (searchText, restaurants) => {
-    return restaurants.filter((restaurant) => {
-        restaurant.data.name.toUpperCase().includes(searchText.toUpperCase())
-    })
+function filterData(searchText, restaurants) {
+    let filterData = restaurants.filter((restaurant) => {
+        return restaurant.data.name.toUpperCase().includes(searchText.toUpperCase())
+    });
+
+    return filterData;
 }
 
 const Body = () => {
-    // To Create useState Variable
-    const [searchText, setSearchText] = useState('');
-    const [restaurents, setRestaurents] = useState(restaurentList);
-    // const [searchClick, setSearchClick] = useState('False');
-    
-    return (
+    const [searchText, setSearchText] = useState("");
+    const [allRestaurents, setAllRestaurents] = useState('');
+    const [filteredRestaurents, setFilteredRestaurents] = useState('');
+
+    useEffect(() => {
+        getRestaurents();
+    }, []);
+
+    async function getRestaurents() {
+        const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING');
+        const json = await data.json();
+
+        // todo Optional Chaining
+        setAllRestaurents(json.data.cards[2].data.data.cards);
+        setFilteredRestaurents(json.data.cards[2].data.data.cards);
+    }
+
+    // ! Not Rendered Component (Early Return)
+    // if (!allRestaurents) return null;
+    return (allRestaurents.length == 0) ? <Shimmer /> : (
         <>
             <div className="search-container col-lg-6 mt-4">
-                <input type="text" className="form-control" placeholder="Search" value = { searchText } onChange={(e) => setSearchText(e.target.value)} />
-                <button className="btn btn-violet text-white" onClick={() => { 
-                    // (searchClick === 'False') ? setSearchClick('True') : setSearchClick('False');
-                    setRestaurents(filterData(searchText, restaurents));
+                <input type="text" className="form-control" placeholder="Search" value={searchText} onChange={(e) => { setSearchText(e.target.value) }} />
+                <button className="btn btn-violet text-white" onClick={() => {
+                    setFilteredRestaurents(filterData(searchText, allRestaurents))
                 }}>Search</button>
             </div>
-            {/* <h1>{ searchClick }</h1> */}
             <div className='container restaurent-card mt-4'>
                 {
-                    restaurents.map((restaurant) => {
+                    (filteredRestaurents.length === 0) ? <h1>No Restaurent Found</h1> :
+                    filteredRestaurents.map((restaurant) => {
                         return <RestaurentCard {...restaurant.data} key={restaurant.data.id} />
                     })
                 }

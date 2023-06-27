@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // Export by Name
 export const Title = () => {
     return (
@@ -7,6 +9,8 @@ export const Title = () => {
 
 // Export by Default
 const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+
     return (
         <>
             <nav className="navbar navbar-expand-lg">
@@ -25,6 +29,17 @@ const Header = () => {
                         <li className="nav-item">
                             <a className="nav-link text-white text-17" href="#">Cart</a>
                         </li>
+                        {
+                            (isLoggedIn == true) ? <li className="nav-item">
+                                <button className="btn btn-white ps-4 pe-4 ms-3 text-purple text-17" href="#" onClick={() => {
+                                    setIsLoggedIn(false);
+                                }}>Log out</button>
+                            </li> : <li className="nav-item">
+                                <button className="btn btn-white ps-4 pe-4 ms-3 text-purple text-17" href="#" onClick={() => {
+                                    setIsLoggedIn(true);
+                                }}>Login</button>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>

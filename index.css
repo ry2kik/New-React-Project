@@ -1,5 +1,7 @@
 .navbar { background-color: #A32EFF; }
 .btn-violet { background-color: #A32EFF; }
+.btn-white { background-color: white;}
+.text-purple { color: #8a14e4; }
 
 .dancing-script { 
     font-family: 'Dancing Script', cursive;
@@ -8,7 +10,7 @@
 
 .text-17 { 
     font-size: 17px; 
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Abel', sans-serif;
 }
 
 .card {
@@ -43,3 +45,10 @@
 .search-container button:focus { box-shadow: none; }
 .search-container input::placeholder { color: #A32EFF; }
 .card .card-body button { box-shadow: none; }
+.restaurent-card h1 {
+    width: 96%;
+    text-align: center;
+    color: #8a14e4;
+    margin-top: 30px;
+    font-family: 'Abel', sans-serif;
+}
