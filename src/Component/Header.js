@@ -1,9 +1,13 @@
 import { useState } from "react";
+import Logo from '../Component/Assets/img/food-villa.png';
 
 // Export by Name
 export const Title = () => {
     return (
-        <a className="navbar-brand text-white dancing-script" href="/">Food Villa</a>
+        <a className="navbar-brand text-white dancing-script" href="/">
+            <img className="me-3" src={Logo} height="50px" width="50px" /> 
+            Food Villa
+        </a>
     )
 };
 
@@ -18,10 +22,10 @@ const Header = () => {
                     <Title />
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link text-white active text-17" aria-current="page" href="#">Home</a>
+                            <a className="nav-link text-white active text-17" aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white text-17" href="#">About</a>
+                            <a className="nav-link text-white text-17" href="/about">About</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text-white text-17" href="#">Contact</a>

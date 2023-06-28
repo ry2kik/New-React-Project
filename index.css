@@ -3,6 +3,10 @@
 .btn-white { background-color: white;}
 .text-purple { color: #8a14e4; }
 
+.navbar-nav button.btn {
+    box-shadow: none;
+}
+
 .dancing-script { 
     font-family: 'Dancing Script', cursive;
     font-size: 30px;
@@ -52,3 +56,44 @@
     margin-top: 30px;
     font-family: 'Abel', sans-serif;
 }
+
+.shimmer-container {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.shimmer-card {
+    width: 207px;
+    height: 250px;
+    background-color: whitesmoke;
+}
+
+.shimmer-card::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0) 70%
+    );
+    top: 0;
+    left: -100px;
+    animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+    0% { left: -100px }
+    20% { left: 100% }
+    100% { left: 100% }
+}
+
+.errorImage {
+    text-align: center;
+    margin-top: 70px;
+}
+

@@ -32,8 +32,14 @@ import ReactDOM from 'react-dom/client';
 import Body from './Component/Body';
 import Header from './Component/Header';
 import Footer from './Component/Footer';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import About from './Component/About';
+import Error from './Component/Error';
 
 const AppLayout = () => {
+    // ! Never create a component inside a component's Body
+    // ! Never write a useState inside a if() condition or for() Loop
+
     return (
         <>
             <Header />
@@ -42,5 +48,18 @@ const AppLayout = () => {
         </>
     )
 }
+
+const appRouter = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />,
+        errorElement: <Error />
+    },
+    {
+        path: '/About',
+        element: <About />
+    }
+]);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AppLayout />); 
+root.render(<RouterProvider router = { appRouter } />); 

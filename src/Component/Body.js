@@ -1,3 +1,5 @@
+// ? useState() is hook that React gives you to create local variable inside a functional component. Never use useState() outside of a component 
+
 import { useState, useEffect } from "react";
 import { restaurentList } from "../Config";
 import { RestaurentCard } from "./RestaurentCard";

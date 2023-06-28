@@ -7,3 +7,4 @@ npx parcel index.html: It'll create .parcel-cache and dist folder
 npm install react: It's used to install react (Normal Dependency)
 npm install react-dom: It's used to install reactDOM (Normal Dependency)
 npm install babel-plugin-transform-remove-console --save-dev: To install console.log() removal npm package
+npm install react-router-dom: To install react-router package
