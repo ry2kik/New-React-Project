@@ -32,9 +32,13 @@ import ReactDOM from 'react-dom/client';
 import Body from './Component/Body';
 import Header from './Component/Header';
 import Footer from './Component/Footer';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import Cart from './Component/Cart';
 import About from './Component/About';
 import Error from './Component/Error';
+import Contact from './Component/Contact';
+import RestaurentMenu from './Component/RestaurentMenu';
+
 
 const AppLayout = () => {
     // ! Never create a component inside a component's Body
@@ -43,7 +47,7 @@ const AppLayout = () => {
     return (
         <>
             <Header />
-            <Body />
+            <Outlet />
             <Footer />
         </>
     )
@@ -53,12 +57,30 @@ const appRouter = createBrowserRouter([
     {
         path: '/',
         element: <AppLayout />,
-        errorElement: <Error />
+        errorElement: <Error />,
+        children: [
+            {
+                path: '/',
+                element: <Body />
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+            {
+                path: '/contact',
+                element: <Contact />
+            },
+            {
+                path: '/cart',
+                element: <Cart />
+            },
+            {
+                path: '/restaurent/:resId',
+                element: <RestaurentMenu />
+            }
+        ]
     },
-    {
-        path: '/About',
-        element: <About />
-    }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
