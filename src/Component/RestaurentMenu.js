@@ -12,6 +12,7 @@ function filterData(vegOrNotRestaurent) {
     return filterData;
 }
 
+
 const RestaurentMenu = () => {
     // ? How to read Dynamic URL params 
     const { resId } = useParams();
