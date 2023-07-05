@@ -4,11 +4,20 @@ import { Shimmer } from "./Shimmer";
 import { MENU_API } from "../Config";
 import RestaurentMenuCard from "./RestaurentMenuCard";
 
+function filterData(vegOrNotRestaurent) {
+    let filterData = vegOrNotRestaurent.filter((res) => {
+        return res.card.info.itemAttribute.vegClassifier == "VEG";
+    });
+
+    return filterData;
+}
+
 const RestaurentMenu = () => {
     // ? How to read Dynamic URL params 
     const { resId } = useParams();
     const [isVeg, setIsVeg] = useState(false);
     const [restaurant, setRestaurent] = useState(null);
+    const [vegOrNotRestaurent, setVegOrNotRestaurent] = useState(null);
 
     useEffect(() => {
         getRestaurentInfo();
@@ -23,7 +32,14 @@ const RestaurentMenu = () => {
     if (restaurant === null) return <Shimmer />
 
     const { name, cuisines, areaName, costForTwoMessage, avgRating, totalRatingsString, sla } = restaurant.cards[0].card.card.info;
+
     const { itemCards } = restaurant.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+
+    if (vegOrNotRestaurent == null) {
+        setVegOrNotRestaurent(itemCards);
+    }
+
+    if (vegOrNotRestaurent == null) return <Shimmer />
 
     return (
         <div className="container menu mt-5">
@@ -60,16 +76,23 @@ const RestaurentMenu = () => {
                     {
                         (isVeg == true) ? <button className="btn btn-primary shadow-none" onClick={() => {
                             setIsVeg(false);
-                        }}>Veg</button> : <button className="btn btn-primary shadow-none" onClick={() => {
-                            setIsVeg(true)
-                        }}>Non Veg</button>
+                            setVegOrNotRestaurent(itemCards);
+                        }}>Veg Only</button> : <button className="btn btn-primary shadow-none" onClick={() => {
+                            setIsVeg(true);
+                            setVegOrNotRestaurent(filterData(vegOrNotRestaurent));
+                        }}>All</button>
                     }
 
                     <div className="row mt-3 justify-content-between recommanded-restaurent">
                         {
-                            itemCards.map((itemRestaurents) => {
+                            vegOrNotRestaurent.map((itemRestaurents) => {
+                                if (itemRestaurents.length == 0) {
+                                    return (
+                                        <h1>No Veg item found</h1>
+                                    )
+                                }
                                 return (
-                                    <RestaurentMenuCard { ...itemRestaurents.card.info } key = { itemRestaurents.card.info.id } />                                    
+                                    <RestaurentMenuCard {...itemRestaurents.card.info} key={itemRestaurents.card.info.id} />
                                 )
                             })
                         }
